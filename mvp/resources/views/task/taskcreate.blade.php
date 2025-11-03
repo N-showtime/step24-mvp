@@ -2,7 +2,7 @@
 
     <div class="max-w-7xl mx-auto px-6">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">垢抜けタスク</h2>
-        <x-message :message="session('message')" />
+        {{-- <x-message :message="session('message')" /> --}}
 
         {{--  保存フォーム（post.store） --}}
         {{-- <form method="post" action="{{ route('post.store') }}" id="save-form"> --}}
@@ -34,8 +34,8 @@
                 </div>
 
                 {{-- 繰り返しタイプ --}}
-                <div>
-                    <label for="repeat_type" class="font-semibold block">繰り返しタイプ</label>
+                <div class="w-full flex flex-col mt-6">
+                    <label for="repeat_type" class="font-semibold block mb-2">繰り返しタイプ</label>
                     <select name="repeat_type" id="repeat_type" class="w-full p-2 border border-gray-300 rounded-md">
                         <option value="">繰り返しなし</option>
                         <option value="daily">毎日</option>
@@ -45,13 +45,12 @@
                 </div>
 
                 {{-- 繰り返す曜日 --}}
-                <div>
-                    <label class="font-semibold block mb-2">繰り返す曜日</label>
-                    <div class="flex flex-wrap gap-3">
+                <div class="w-full flex flex-col mt-6">
+                    <label class="font-semibold block mb-3">繰り返す曜日</label>
+                    <div class="flex flex-wrap gap-x-6 gap-y-3">
                         @foreach (['Mon' => '月', 'Tue' => '火', 'Wed' => '水', 'Thu' => '木', 'Fri' => '金', 'Sat' => '土', 'Sun' => '日'] as $key => $label)
-                            <label class="flex items-center space-x-1">
-                                <input type="checkbox" name="day_of_week[]" value="{{ $key }}"
-                                    class="rounded border-gray-300">
+                            <label class="flex items-center space-x-2 text-gray-700">
+                                <input type="checkbox" name="day_of_week[]" value="{{ $key }}" class="rounded border-gray-300">
                                 <span>{{ $label }}</span>
                             </label>
                         @endforeach
@@ -59,7 +58,7 @@
                 </div>
 
 
-                <div class="w-full flex flex-col">
+                <div class="w-full flex flex-col mt-6">
                     <label for="title" class="font-semibold mt-4">開始日</label>
                     {{-- <x-input-error :messages="$errors->get('title')" class="mt-2" /> --}}
                     <input type="date" name="start_date" class="w-auto p-2 border border-gray-300 rounded-md" id="start_date">

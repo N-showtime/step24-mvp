@@ -6,6 +6,10 @@ use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use App\Http\Controllers\TaskController;
+
+
+Route::get('task/taskcreate', [TaskController::class, 'taskCreate']);
 
 Route::get('/', function () {
     return view('welcome');
