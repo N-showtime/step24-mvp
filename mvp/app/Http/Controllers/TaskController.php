@@ -30,4 +30,9 @@ class TaskController extends Controller
         $request->session()->flash('message', '保存しました');
         return back();
     }
+
+    public function taskIndex() {
+        $tasks = Task::all();
+        return view('task.taskIndex', compact('tasks')) ;
+    }
 }
