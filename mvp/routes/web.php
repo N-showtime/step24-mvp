@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\TaskController;
 
-
+// タスクの作成・保存
 Route::get('task/taskcreate', [TaskController::class, 'taskCreate']);
+Route::post('task', [TaskController::class, 'taskStore'])->name('task.store');
 
 Route::get('/', function () {
     return view('welcome');

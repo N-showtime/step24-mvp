@@ -4,9 +4,13 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">垢抜けタスク</h2>
         {{-- <x-message :message="session('message')" /> --}}
 
-        {{--  保存フォーム（post.store） --}}
-        {{-- <form method="post" action="{{ route('post.store') }}" id="save-form"> --}}
-        <form>
+        @if (session('message'))
+            <div class="text-red-600 font-bold">
+                {{session('message')}}
+            </div>
+        @endif
+        {{--  保存フォーム（task.store） --}}
+        <form method="post" action="{{ route('task.store') }}" id="save-form">
             @csrf
             <div class="mt-8">
                 <div class="w-full flex flex-col">
