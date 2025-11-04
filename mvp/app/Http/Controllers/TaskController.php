@@ -35,4 +35,36 @@ class TaskController extends Controller
         $tasks = Task::all();
         return view('task.taskIndex', compact('tasks')) ;
     }
+
+     public function taskShow(Task $task) {
+        return view('task.taskshow', compact('task')) ;
+    }
+
+    public function taskEdit(Task $task) {
+        return view('task.taskedit', compact('task')) ;
+    }
+
+     public function taskUpdate(Request $request, Task $task) {
+
+        $validated = $request->validate([
+            'name' => 'required|max:20',
+            'budget' => 'nullable|integer',
+        ]);
+        $task->update([
+             ...$validated,
+            'description' => $request->description,
+            'date' => $request->date,
+            'repeat_type' => $request->repeat_type,
+            'day_of_week' => is_array($request->day_of_week)? implode(',', $request->day_of_week): $request->day_of_week,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date
+
+        ]);
+        $request->session()->flash('message', '更新しました');
+        return back();
+    }
+
+
+
+
 }

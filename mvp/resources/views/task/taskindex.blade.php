@@ -15,7 +15,10 @@
                     <div class="mt-6 p-6 bg-white rounded-2xl shadow-md border border-gray-200">
                         <p class="p-4 text-lg font-semibold">
                             タスク名：
-                            {{ $task->name }}
+                            <a href="{{route('task.show', $task)}}" class="text-blue-600">
+                                 {{ $task->name }}
+                            </a>
+
                         </p>
                         <hr class="w-full">
                         <p class="mt-4 p-4 text-lg ">
