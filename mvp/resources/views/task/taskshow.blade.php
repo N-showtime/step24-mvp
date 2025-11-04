@@ -22,13 +22,13 @@
                                 編集
                             </flux:button>
                         </a>
-                        {{-- <form method="post" action="{{ route('post.destroy', $post)}}">
+                        <form method="post" action="{{ route('task.destroy', $task)}}">
                             @csrf
                             @method('delete')
                              <flux:button variant="danger" type="submit" class="cursor-pointer">
                                 削除
                             </flux:button>
-                        </form> --}}
+                        </form>
                     </div>
                     <hr class="w-full">
                     <p class="mt-4 p-4 text-lg ">

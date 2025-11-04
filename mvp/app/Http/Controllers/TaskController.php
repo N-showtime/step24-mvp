@@ -44,7 +44,7 @@ class TaskController extends Controller
         return view('task.taskedit', compact('task')) ;
     }
 
-     public function taskUpdate(Request $request, Task $task) {
+    public function taskUpdate(Request $request, Task $task) {
 
         $validated = $request->validate([
             'name' => 'required|max:20',
@@ -64,7 +64,10 @@ class TaskController extends Controller
         return back();
     }
 
-
-
+    public function taskDestroy(Request $request, Task $task) {
+        $task->delete();
+        $request->session()->flash('message', '削除しました');
+        return redirect()->route('task.index') ;
+    }
 
 }
