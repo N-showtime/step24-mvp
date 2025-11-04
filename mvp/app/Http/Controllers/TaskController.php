@@ -2,17 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Task;
+use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function taskCreate() {
-        return view('task.taskcreate');
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $tasks = Task::all();
+        return view('task.index', compact('tasks')) ;
     }
 
-    public function taskStore(Request $request) {
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+         return view('task.create');
+    }
 
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
         $validated = $request->validate([
             'name' => 'required|max:20',
             'budget' => 'nullable|integer',
@@ -28,24 +44,30 @@ class TaskController extends Controller
 
         ]);
         $request->session()->flash('message', '保存しました');
-        return back();
+        return redirect()->route('task.index');
     }
 
-    public function taskIndex() {
-        $tasks = Task::all();
-        return view('task.taskIndex', compact('tasks')) ;
+    /**
+     * Display the specified resource.
+     */
+    public function show(Task $task)
+    {
+        return view('task.show', compact('task')) ;
     }
 
-     public function taskShow(Task $task) {
-        return view('task.taskshow', compact('task')) ;
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Task $task)
+    {
+        return view('task.edit', compact('task')) ;
     }
 
-    public function taskEdit(Task $task) {
-        return view('task.taskedit', compact('task')) ;
-    }
-
-    public function taskUpdate(Request $request, Task $task) {
-
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Task $task)
+    {
         $validated = $request->validate([
             'name' => 'required|max:20',
             'budget' => 'nullable|integer',
@@ -61,13 +83,16 @@ class TaskController extends Controller
 
         ]);
         $request->session()->flash('message', '更新しました');
-        return back();
+         return redirect()->route('task.show', ['task' => $task->id]) ;
     }
 
-    public function taskDestroy(Request $request, Task $task) {
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Request $request, Task $task)
+    {
         $task->delete();
         $request->session()->flash('message', '削除しました');
         return redirect()->route('task.index') ;
     }
-
 }
