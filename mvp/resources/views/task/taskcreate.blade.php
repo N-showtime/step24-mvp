@@ -14,26 +14,26 @@
             @csrf
             <div class="mt-8">
                 <div class="w-full flex flex-col">
-                    <label for="title" class="font-semibold mt-4">タスク名</label>
-                    {{-- <x-input-error :messages="$errors->get('title')" class="mt-2" /> --}}
+                    <label for="name" class="font-semibold mt-4">タスク名</label>
+                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     <input type="text" name="name" class="w-auto p-2 border border-gray-300 rounded-md" id="name">
                 </div>
 
                 <div class="w-full flex flex-col">
-                    <label for="body" class="font-semibold mt-4">備考</label>
-                    {{-- <x-input-error :messages="$errors->get('body')" class="mt-2" /> --}}
+                    <label for="description" class="font-semibold mt-4">備考</label>
+                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     <textarea name="description" class="w-auto p-2 border border-gray-300 rounded-md" id="description" cols="30" rows="8"></textarea>
                 </div>
 
                 <div class="w-full flex flex-col">
-                    <label for="title" class="font-semibold mt-4">予算</label>
-                    {{-- <x-input-error :messages="$errors->get('title')" class="mt-2" /> --}}
+                    <label for="number" class="font-semibold mt-4">予算</label>
+                    <x-input-error :messages="$errors->get('number')" class="mt-2" />
                     <input type="number" name="budget" class="w-auto p-2 border border-gray-300 rounded-md" id="budget">
                 </div>
 
                 <div class="w-full flex flex-col">
-                    <label for="title" class="font-semibold mt-4">タスク実施日</label>
-                    {{-- <x-input-error :messages="$errors->get('title')" class="mt-2" /> --}}
+                    <label for="date" class="font-semibold mt-4">タスク実施日</label>
+                    <x-input-error :messages="$errors->get('date')" class="mt-2" />
                     <input type="date" name="date" class="w-auto p-2 border border-gray-300 rounded-md" id="date">
                 </div>
 
@@ -63,13 +63,13 @@
 
 
                 <div class="w-full flex flex-col mt-6">
-                    <label for="title" class="font-semibold mt-4">開始日</label>
+                    <label for="start_date" class="font-semibold mt-4">開始日</label>
                     {{-- <x-input-error :messages="$errors->get('title')" class="mt-2" /> --}}
                     <input type="date" name="start_date" class="w-auto p-2 border border-gray-300 rounded-md" id="start_date">
                 </div>
 
                 <div class="w-full flex flex-col">
-                    <label for="title" class="font-semibold mt-4">終了日</label>
+                    <label for="end_date" class="font-semibold mt-4">終了日</label>
                     {{-- <x-input-error :messages="$errors->get('title')" class="mt-2" /> --}}
                     <input type="date" name="end_date" class="w-auto p-2 border border-gray-300 rounded-md" id="end_date">
                 </div>

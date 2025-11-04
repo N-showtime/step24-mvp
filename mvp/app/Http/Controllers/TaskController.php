@@ -12,10 +12,14 @@ class TaskController extends Controller
     }
 
     public function taskStore(Request $request) {
+
+        $validated = $request->validate([
+            'name' => 'required|max:20',
+            'budget' => 'integer',
+        ]);
         $task = Task::create([
-            'name' => $request->name,
+            $validated,
             'description' => $request->description,
-            'budget' => $request->budget,
             'date' => $request->date,
             'repeat_type' => $request->repeat_type,
             'day_of_week' => is_array($request->day_of_week)? implode(',', $request->day_of_week): $request->day_of_week,
