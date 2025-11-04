@@ -74,6 +74,10 @@
                     <input type="date" name="end_date" class="w-auto p-2 border border-gray-300 rounded-md" id="end_date">
                 </div>
 
+                @error('end_date')
+                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                @enderror
+
             </div>
         </form>
 

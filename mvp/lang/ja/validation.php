@@ -156,7 +156,7 @@ return [
     'url' => ':attributeに正しい形式を指定してください。',
     'ulid' => ':attributeに有効なULIDを指定してください。',
     'uuid' => ':attributeに有効なUUIDを指定してください。',
-
+    'after_or_equal' => ':attribute には :date 以降の日付を指定してください。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -261,6 +261,11 @@ return [
         'updated_at' => '更新日',
         'username' => 'ユーザー名',
         'year' => '年',
+        'start_date' => '開始日',
+        'end_date' => '終了日',
     ],
+
+
+
 
 ];
