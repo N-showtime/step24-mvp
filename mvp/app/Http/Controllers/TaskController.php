@@ -15,10 +15,10 @@ class TaskController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|max:20',
-            'budget' => 'integer',
+            'budget' => 'nullable|integer',
         ]);
         $task = Task::create([
-            $validated,
+             ...$validated,
             'description' => $request->description,
             'date' => $request->date,
             'repeat_type' => $request->repeat_type,
