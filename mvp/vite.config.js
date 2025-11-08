@@ -1,8 +1,6 @@
-import {
-    defineConfig
-} from 'vite';
+import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
     plugins: [
@@ -13,6 +11,11 @@ export default defineConfig({
         tailwindcss(),
     ],
     server: {
+        host: '0.0.0.0',      // ← Dockerから外部アクセスを許可
+        port: 5173,           // ← 明示的にViteポート指定
         cors: true,
+        hmr: {
+            host: '127.0.0.1', // ← Windowsブラウザから見えるホスト
+        },
     },
 });
