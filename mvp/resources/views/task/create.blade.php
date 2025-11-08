@@ -89,3 +89,54 @@
         </button>
     </div>
 </x-layouts.app>
+
+@vite(['resources/js/app.js'])
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("save-form");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault(); // ページリロード防止
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch("{{ route('task.store') }}", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    "Accept": "application/json",
+                },
+                body: formData,
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                console.error(err);
+                alert("保存に失敗しました。");
+                return;
+            }
+
+            const data = await response.json();
+            alert(`「${data.name}」を登録しました！`);
+
+            // // フォームをリセット
+            // form.reset();
+
+            // // カレンダーを再読み込み
+            // if (window.calendar) {
+            //     window.calendar.refetchEvents();
+            // }
+
+            // ✅ カレンダー画面（/calendar）に移動
+            window.location.href = "{{ route('calendar.index') }}";
+
+        } catch (error) {
+            console.error(error);
+            alert("通信エラーが発生しました。");
+        }
+    });
+});
+</script>
+

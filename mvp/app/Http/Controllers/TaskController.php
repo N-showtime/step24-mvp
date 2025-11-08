@@ -42,6 +42,12 @@ class TaskController extends Controller
             'repeat_type' => $request->repeat_type,
             'day_of_week' => is_array($request->day_of_week)? implode(',', $request->day_of_week): $request->day_of_week,
         ]);
+
+         // Ajax (JSON) リクエストなら JSON を返す
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json($task, 201, [], JSON_UNESCAPED_UNICODE);
+        }
+
         $request->session()->flash('message', '保存しました');
         return redirect()->route('task.index');
     }
@@ -93,5 +99,23 @@ class TaskController extends Controller
         $task->delete();
         $request->session()->flash('message', '削除しました');
         return redirect()->route('task.index') ;
+    }
+
+    // カレンダーへの表示用
+    public function getEvents()
+    {
+        // dateカラムが存在するタスクだけ取得（NULL対策）
+        $tasks = Task::whereNotNull('date')->get(['id', 'name', 'date']);
+
+        // FullCalendar用に整形
+        $events = $tasks->map(function ($task) {
+            return [
+                'id' => $task->id,
+                'title' => $task->name,  // nameカラムをタイトルに使う
+                'start' => $task->date,  // 日付をstartに設定
+            ];
+        });
+
+        return response()->json($events, 200, [], JSON_UNESCAPED_UNICODE);
     }
 }

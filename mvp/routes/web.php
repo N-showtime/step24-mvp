@@ -11,6 +11,9 @@ use App\Http\Controllers\CalendarController;
 
 // カレンダーの表示
 Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
+// カレンダーへの反映
+Route::get('/task/events', [TaskController::class, 'getEvents'])->name('task.events');
+
 
 // タスクの作成・保存・一覧表示・個別表示機能・編集機能・消去機能
 Route::resource('task', TaskController::class);
