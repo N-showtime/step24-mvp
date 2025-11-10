@@ -13,7 +13,12 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    {{-- <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item> --}}
+                    <flux:navlist.item icon="calendar" :href="route('calendar.index')" :current="request()->routeIs('calendar.index')">カレンダー</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('task.index')" :current="request()->routeIs('task.index')">タスク一覧</flux:navlist.item>
+                    <flux:navlist.item icon="pencil-square" :href="route('task.create')" :current="request()->routeIs('task.create')">新規作成</flux:navlist.item>
+
+
                 </flux:navlist.group>
             </flux:navlist>
 
