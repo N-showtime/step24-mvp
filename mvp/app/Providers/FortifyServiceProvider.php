@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
+
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -26,9 +29,31 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->configureActions();
-        $this->configureViews();
-        $this->configureRateLimiting();
+         $this->configureActions();
+    $this->configureViews();
+    $this->configureRateLimiting();
+
+
+    // ログイン後リダイレクト
+    $this->app->singleton(LoginResponseContract::class, function ($app) {
+        return new class implements LoginResponseContract {
+            public function toResponse($request)
+            {
+                return redirect()->route('calendar.index');
+            }
+        };
+    });
+
+    // 登録後リダイレクト
+    $this->app->singleton(RegisterResponseContract::class, function ($app) {
+        return new class implements RegisterResponseContract {
+            public function toResponse($request)
+            {
+                return redirect()->route('calendar.index');
+            }
+        };
+    });
+
     }
 
     /**
