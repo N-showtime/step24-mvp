@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
         initialView: 'dayGridMonth',
         locale: 'ja',
         events: '/task/events',
+        eventClick: function (info) {
+            const taskId = info.event.id; // ← イベントデータのidを取得
+            if (taskId) {
+                window.location.href = `/task/${taskId}`;
+            }
+        },
     });
 
     // 他ファイルやフォームからも呼べるように
