@@ -87,8 +87,12 @@ class TaskController extends Controller
             'day_of_week' => is_array($request->day_of_week)? implode(',', $request->day_of_week): $request->day_of_week,
 
         ]);
+         // Ajax (JSON) リクエストなら JSON を返す
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json($task, 200, [], JSON_UNESCAPED_UNICODE);
+        }
         $request->session()->flash('message', '更新しました');
-         return redirect()->route('task.show', ['task' => $task->id]) ;
+         return redirect()->route('calendar.index') ;
     }
 
     /**
@@ -96,10 +100,24 @@ class TaskController extends Controller
      */
     public function destroy(Request $request, Task $task)
     {
+    try {
         $task->delete();
         $request->session()->flash('message', '削除しました');
-        return redirect()->route('task.index') ;
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['message' => '削除しました'], 200, [], JSON_UNESCAPED_UNICODE);
+        }
+
+        return redirect()->route('calendar.index');
+    } catch (\Exception $e) {
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['error' => '削除に失敗しました'], 500, [], JSON_UNESCAPED_UNICODE);
+        }
+
+        return back()->with('message', '削除に失敗しました');
     }
+}
+
 
     // カレンダーへの表示用
     public function getEvents()
